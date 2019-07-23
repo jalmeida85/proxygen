@@ -437,10 +437,10 @@ class RandBytesGenHandler : public BaseQuicHandler {
     txn_->sendBody(folly::IOBuf::copyBuffer(errorMsg));
   }
 
-  const uint64_t kMaxAllowedLength{10 * 1024 * 1024}; // 10 MB
+  const uint64_t kMaxAllowedLength{50 * 1024 * 1024}; // 10 MB
   const uint64_t kMaxChunkSize{100 * 1024};           // 100 KB
   const std::string kErrorMsg =
-      folly::to<std::string>("More than 10 MB of data requested. ",
+      folly::to<std::string>("More than 50 MB of data requested. ",
                              "Please request for smaller size.");
   uint64_t respBodyLen_;
   bool paused_{false};
