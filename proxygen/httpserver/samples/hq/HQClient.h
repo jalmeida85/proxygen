@@ -212,6 +212,7 @@ class HQClient : private proxygen::HQSession::ConnectCallback {
 						false,
 						http_major,
 						http_minor,
+						false,
 						latency_,
 						packet_loss_,
 						bytes_));
