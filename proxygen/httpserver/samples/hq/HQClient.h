@@ -42,7 +42,7 @@ class HQClient : private proxygen::HQSession::ConnectCallback {
 		folly::Optional <quic::QuicVersion> draftVersion, bool useDraftFirst,
 		const std::chrono::milliseconds txnTimeout, const std::string &qLoggerPath, bool prettyJson,
 		bool usePartialReliability = false, folly::Optional <uint64_t> prChunkDelayMs = folly::none,
-		const std::string &lat, const std::string &plr, const std::string &bytes)
+		const std::string &lat = "", const std::string &plr = "", const std::string &bytes = "0")
 		: host_(host),
 		  port_(port),
 		  body_(body),
@@ -136,7 +136,6 @@ class HQClient : private proxygen::HQSession::ConnectCallback {
 		session_->setSocket(quicClient_);
 		session_->setConnectCallback(this);
 
-		start_time_ = getTime();
 		LOG(INFO) << "HQClient connecting to " << addr.describe();
 		session_->startNow();
 		quicClient_->start(session_);

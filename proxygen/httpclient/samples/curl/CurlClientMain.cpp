@@ -90,7 +90,7 @@ int main(int argc, char *argv[]) {
 		FLAGS_h2c,
 		"",
 		"",
-		"-1");
+		"0");
 	curlClient.setFlowControlSettings(FLAGS_recv_window);
 
 	SocketAddress addr;
