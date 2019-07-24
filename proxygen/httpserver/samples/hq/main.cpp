@@ -182,7 +182,7 @@ int main(int argc, char* argv[]) {
                     FLAGS_qlogger_path,
                     FLAGS_pretty_json,
                     FLAGS_use_pr,
-                    FLAGS_pr_chunk_delay_ms
+                    FLAGS_pr_chunk_delay_ms,
                     FLAGS_lat,
                     FLAGS_plr,
                     FLAGS_bytes);
