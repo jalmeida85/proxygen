@@ -240,7 +240,8 @@ void CurlClient::onEOM() noexcept {
 	LOG_IF(INFO, loggingEnabled_) << "Got EOM";
 	stop_time_ = getTime();
 	auto elapsed = stop_time_ - start_time_;
-	float rate = bytes_ * 8.0f * 1000.0f / (1024.0f * 1024.0f * elapsed);
+	int bytes = std::stoi(bytes_);
+	float rate = bytes * 8.0f * 1000.0f / (1024.0f * 1024.0f * elapsed);
 	LOG(INFO) << "latency: " << latency_ << "\tloss_percentage: " << packet_loss_ << "\t start: " << start_time_
 			  << "\t stop: " << stop_time_ << "\t bytes: " << bytes_ << "\t rate: " << rate;
 }
