@@ -68,8 +68,8 @@ class CurlClient : public proxygen::HTTPConnector::Callback, public proxygen::HT
 	CurlClient(
 		folly::EventBase *evb, proxygen::HTTPMethod httpMethod, const proxygen::URL &url, const proxygen::URL *proxy,
 		const proxygen::HTTPHeaders &headers, const std::string &inputFilename, bool h2c = false,
-		unsigned short httpMajor = 1, unsigned short httpMinor = 1, bool partiallyReliable = false, std::string lat,
-		std::string plr, std::string bytes);
+		unsigned short httpMajor = 1, unsigned short httpMinor = 1, bool partiallyReliable = false, const std::string &lat,
+		const std::string plr, &const std::string &bytes);
 
 	virtual ~CurlClient() = default;
 
