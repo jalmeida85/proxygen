@@ -87,10 +87,7 @@ int main(int argc, char *argv[]) {
 		FLAGS_proxy.empty() ? nullptr : &proxy,
 		headers,
 		FLAGS_input_filename,
-		FLAGS_h2c,
-		"",
-		"",
-		"0");
+		FLAGS_h2c);
 	curlClient.setFlowControlSettings(FLAGS_recv_window);
 
 	SocketAddress addr;
