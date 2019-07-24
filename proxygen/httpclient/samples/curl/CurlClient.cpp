@@ -35,7 +35,7 @@ namespace CurlService {
 CurlClient::CurlClient(
 	EventBase *evb, HTTPMethod httpMethod, const URL &url, const proxygen::URL *proxy, const HTTPHeaders &headers,
 	const string &inputFilename, bool h2c, unsigned short httpMajor, unsigned short httpMinor, bool partiallyReliable,
-	std::string lat, std::string plr, std::string bytes)
+	const std::string &lat, const std::string &plr, const std::string &bytes)
 	: evb_(evb),
 	  httpMethod_(httpMethod),
 	  url_(url),
