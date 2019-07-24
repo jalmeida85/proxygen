@@ -71,6 +71,10 @@ DEFINE_uint32(pr_chunk_delay_ms,
 // delay cap of 150 ms:
 //    hq -mode client -use_pr -protocol="h3-20" -path="/pr_cat" -pr_chunk_delay_ms 150
 
+DEFINE_string(lat, "0.0", "Private key file path");
+DEFINE_string(plr, "0.0", "Private key file path");
+DEFINE_string(bytes, "24262167", "Private key file path");
+
 using namespace quic::samples;
 
 quic::CongestionControlType flagsToCongestionControlType(
@@ -178,7 +182,10 @@ int main(int argc, char* argv[]) {
                     FLAGS_qlogger_path,
                     FLAGS_pretty_json,
                     FLAGS_use_pr,
-                    FLAGS_pr_chunk_delay_ms);
+                    FLAGS_pr_chunk_delay_ms
+                    FLAGS_lat,
+                    FLAGS_plr,
+                    FLAGS_bytes);
     if (!FLAGS_protocol.empty()) {
       client.setProtocol(FLAGS_protocol);
     }
