@@ -261,7 +261,7 @@ cmake                                     \
   -DCMAKE_PREFIX_PATH="$DEPS_DIR"         \
   -DCMAKE_INSTALL_PREFIX="$BWD"           \
   $MAYBE_BUILD_QUIC                       \
-  -DBUILD_TESTS=On                        \
+  -DBUILD_TESTS=Off                       \
   ../..
 
 make -j "$JOBS"
