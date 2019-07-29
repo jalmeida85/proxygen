@@ -217,7 +217,7 @@ class HQClient : private proxygen::HQSession::ConnectCallback {
 						packet_loss_,
 						bytes_));
 			}
-			curls_.back()->setLogging(true);
+			curls_.back()->setLogging(false);
 			auto txn = session_->newTransaction(curls_.back().get());
 			if (txn) {
 				curls_.back()->sendRequest(txn);
