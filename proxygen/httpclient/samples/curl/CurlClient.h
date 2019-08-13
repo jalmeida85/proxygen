@@ -69,7 +69,7 @@ class CurlClient : public proxygen::HTTPConnector::Callback, public proxygen::HT
 		folly::EventBase *evb, proxygen::HTTPMethod httpMethod, const proxygen::URL &url, const proxygen::URL *proxy,
 		const proxygen::HTTPHeaders &headers, const std::string &inputFilename, bool h2c = false,
 		unsigned short httpMajor = 1, unsigned short httpMinor = 1, bool partiallyReliable = false, const std::string &lat ="",
-		const std::string &plr ="", const std::string &bytes ="");
+		const std::string &plr ="", const std::string &bytes ="", const std::string &congestion_control ="", int zeroRtt = -1);
 
 	virtual ~CurlClient() = default;
 
@@ -153,6 +153,8 @@ class CurlClient : public proxygen::HTTPConnector::Callback, public proxygen::HT
 	std::string latency_;
 	std::string packet_loss_;
 	std::string bytes_;
+	std::string congestion_control_;
+	int zeroRtt_{-1};
 };
 
 } // CurlService namespace

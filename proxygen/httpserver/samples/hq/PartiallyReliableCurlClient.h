@@ -33,7 +33,7 @@ class PartiallyReliableCurlClient : public CurlService::CurlClient, public folly
 		const proxygen::HTTPHeaders &headers, const std::string &inputFilename, bool h2c = false,
 		unsigned short httpMajor = 1, unsigned short httpMinor = 1,
 		folly::Optional <uint64_t> prChunkDelayMs = folly::none) : CurlService::CurlClient(
-		evb, httpMethod, url, proxy, headers, inputFilename, h2c, httpMajor, httpMinor, true, "", "", "0"),
+		evb, httpMethod, url, proxy, headers, inputFilename, h2c, httpMajor, httpMinor, true, "", "", "0", "", -1),
 																   delayCapMs_(prChunkDelayMs) {
 		evb_ = evb;
 		if (delayCapMs_ && (*delayCapMs_ == 0)) {

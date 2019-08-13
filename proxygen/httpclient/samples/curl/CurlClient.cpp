@@ -35,7 +35,8 @@ namespace CurlService {
 CurlClient::CurlClient(
 	EventBase *evb, HTTPMethod httpMethod, const URL &url, const proxygen::URL *proxy, const HTTPHeaders &headers,
 	const string &inputFilename, bool h2c, unsigned short httpMajor, unsigned short httpMinor, bool partiallyReliable,
-	const std::string &lat, const std::string &plr, const std::string &bytes)
+	const std::string &lat, const std::string &plr, const std::string &bytes, const std::string &congestion_control,
+	int zeroRtt)
 	: evb_(evb),
 	  httpMethod_(httpMethod),
 	  url_(url),
@@ -46,7 +47,9 @@ CurlClient::CurlClient(
 	  partiallyReliable_(partiallyReliable),
 	  latency_(lat),
 	  packet_loss_(plr),
-	  bytes_(bytes) {
+	  bytes_(bytes),
+	  congestion_control_(congestion_control),
+	  zeroRtt_(zeroRtt) {
 	if (proxy != nullptr) {
 		proxy_ = std::make_unique<URL>(proxy->getUrl());
 	}
@@ -243,7 +246,8 @@ void CurlClient::onEOM() noexcept {
 	int bytes = std::stoi(bytes_);
 	float rate = bytes * 8.0f * 1000.0f / (1024.0f * 1024.0f * elapsed);
 	LOG(INFO) << "latency: " << latency_ << "\tloss_percentage: " << packet_loss_ << "\t start: " << start_time_
-			  << "\t stop: " << stop_time_ << "\t bytes: " << bytes_ << "\t rate: " << rate;
+			  << "\t stop: " << stop_time_ << "\t bytes: " << bytes_ << "\t rate: " << rate << "\t congestion_control: "
+			  << congestion_control_ << "\t 0-rtt: " << zeroRtt_;
 }
 
 void CurlClient::onUpgrade(UpgradeProtocol) noexcept {

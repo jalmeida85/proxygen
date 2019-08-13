@@ -42,7 +42,8 @@ class HQClient : private proxygen::HQSession::ConnectCallback {
 		folly::Optional <quic::QuicVersion> draftVersion, bool useDraftFirst,
 		const std::chrono::milliseconds txnTimeout, const std::string &qLoggerPath, bool prettyJson,
 		bool usePartialReliability = false, folly::Optional <uint64_t> prChunkDelayMs = folly::none,
-		const std::string &lat = "", const std::string &plr = "", const std::string &bytes = "0")
+		const std::string &lat = "", const std::string &plr = "", const std::string &bytes = "0",
+		const std::string &congestion_control = "", int zeroRtt = -1)
 		: host_(host),
 		  port_(port),
 		  body_(body),
@@ -58,7 +59,9 @@ class HQClient : private proxygen::HQSession::ConnectCallback {
 		  prChunkDelayMs_(prChunkDelayMs),
 		  latency_(lat),
 		  packet_loss_(plr),
-		  bytes_(bytes) {
+		  bytes_(bytes),
+		  congestion_control_(congestion_control),
+		  zeroRtt_(zeroRtt) {
 		headers_ = CurlService::CurlClient::parseHeaders(headers);
 		if (transportSettings_.pacingEnabled) {
 			pacingTimer_ = TimerHighRes::newTimer(
@@ -215,7 +218,9 @@ class HQClient : private proxygen::HQSession::ConnectCallback {
 						false,
 						latency_,
 						packet_loss_,
-						bytes_));
+						bytes_,
+						congestion_control_,
+						zeroRtt_));
 			}
 			curls_.back()->setLogging(false);
 			auto txn = session_->newTransaction(curls_.back().get());
@@ -267,6 +272,8 @@ class HQClient : private proxygen::HQSession::ConnectCallback {
 	std::string latency_;
 	std::string packet_loss_;
 	std::string bytes_;
+	std::string congestion_control_;
+	int zeroRtt_;
 
 };
 }
