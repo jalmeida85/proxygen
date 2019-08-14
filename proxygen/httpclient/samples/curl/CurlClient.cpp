@@ -245,9 +245,9 @@ void CurlClient::onEOM() noexcept {
 	auto elapsed = stop_time_ - start_time_;
 	int bytes = std::stoi(bytes_);
 	float rate = bytes * 8.0f * 1000.0f / (1024.0f * 1024.0f * elapsed);
-	LOG(INFO) << "latency: " << latency_ << "\tloss_percentage: " << packet_loss_ << "\t start: " << start_time_
-			  << "\t stop: " << stop_time_ << "\t bytes: " << bytes_ << "\t rate: " << rate << "\t congestion_control: "
-			  << congestion_control_ << "\t 0-rtt: " << zeroRtt_;
+	LOG(INFO) << "quic_version: mvfst\t congestion_control: " << congestion_control_ << "\t 0-rtt: " << zeroRtt_
+			  << "latency: " << latency_ << "\tloss_percentage: " << packet_loss_ << "\t start: " << start_time_
+			  << "\t stop: " << stop_time_ << "\t bytes: " << bytes_ << "\t rate: " << rate;
 }
 
 void CurlClient::onUpgrade(UpgradeProtocol) noexcept {
